@@ -82,4 +82,5 @@ int main ()
 		exibirPosfixa(raiz); 
 		printf("\n");  
 	}
+	printf("olar mundo::::");
 }
