@@ -5,39 +5,39 @@
 
 
 
-typedef struct arv
-{
-    int info;
-    struct arv *dir;
-    struct arv *esq;
-
-}No;
-
-
-No *inserir_ArvB(int info, No *Raiz)
-{
-    if(Raiz == NULL){
-        No *novo = (No*)malloc(sizeof(No));
-        novo->info = info;
-        novo->esq = NULL;
-        novo->dir = NULL;
-        return novo;
-
-    }
-    else
+    typedef struct arv
     {
-        if (info < Raiz->info )
-        {
-            Raiz->esq = inserir_ArvB(info, Raiz->esq);
+        int info;
+        struct arv *dir;
+        struct arv *esq;
+
+    }No;
+
+
+    No *inserir_ArvB(int info, No *Raiz)
+    {
+        if(Raiz == NULL){
+            No *novo = (No*)malloc(sizeof(No));
+            novo->info = info;
+            novo->esq = NULL;
+            novo->dir = NULL;
+            return novo;
+
         }
         else
         {
-            Raiz->dir = inserir_ArvB(info, Raiz->dir);
+            if (info < Raiz->info )
+            {
+                Raiz->esq = inserir_ArvB(info, Raiz->esq);
+            }
+            else
+            {
+                Raiz->dir = inserir_ArvB(info, Raiz->dir);
+            }
         }
+        
+        return Raiz;
     }
-    
-    return Raiz;
-}
 
 void print_ordenado(No *Raiz){
     if (Raiz!= NULL)
