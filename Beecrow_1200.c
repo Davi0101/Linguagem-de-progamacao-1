@@ -9,9 +9,9 @@ typedef struct arv {
 } No;
 
 No *inserir_ArvB(char info, No *Raiz);
-void print_ordenado(No *Raiz);
-void print_pre_ordenado(No *Raiz);
-void print_pos_ordenado(No *Raiz);
+void print_ordenado(No *Raiz, int *primeiro);
+void print_pre_ordenado(No *Raiz, int *primeiro);
+void print_pos_ordenado(No *Raiz, int *primeiro);
 int busca(No *Raiz, char c);
 
 int main() {
@@ -24,13 +24,16 @@ int main() {
             scanf(" %c", &info);
             arvore = inserir_ArvB(info, arvore);
         } else if (strcmp(operacao, "INFIXA") == 0) {
-            print_ordenado(arvore);
+            int primeiro = 1;            
+            print_ordenado(arvore, &primeiro);
             printf("\n");
         } else if (strcmp(operacao, "PREFIXA") == 0) {
-            print_pre_ordenado(arvore);
+            int primeiro = 1;
+            print_pre_ordenado(arvore, &primeiro);
             printf("\n");
         } else if (strcmp(operacao, "POSFIXA") == 0) {
-            print_pos_ordenado(arvore);
+            int primeiro = 1;
+            print_pos_ordenado(arvore, &primeiro);
             printf("\n");
         } else if (strcmp(operacao, "P") == 0) {
             scanf(" %c", &info);
@@ -61,27 +64,42 @@ No *inserir_ArvB(char info, No *Raiz) {
     return Raiz;
 }
 
-void print_ordenado(No *Raiz) {
+void print_ordenado(No *Raiz, int *primeiro) {
     if (Raiz != NULL) {
-        print_ordenado(Raiz->esq);
-        printf("%c ", Raiz->info);
-        print_ordenado(Raiz->dir);
+        print_ordenado(Raiz->esq, primeiro);
+        if (*primeiro) {
+            *primeiro = 0;
+        } else {
+            printf(" ");
+        }
+        printf("%c", Raiz->info);
+        print_ordenado(Raiz->dir, primeiro);
     }
 }
 
-void print_pre_ordenado(No *Raiz) {
+void print_pre_ordenado(No *Raiz, int *primeiro) {
     if (Raiz != NULL) {
-        printf("%c ", Raiz->info);
-        print_pre_ordenado(Raiz->esq);
-        print_pre_ordenado(Raiz->dir);
+        if (*primeiro) {
+            *primeiro = 0;
+        } else {
+            printf(" ");
+        }
+        printf("%c", Raiz->info);
+        print_pre_ordenado(Raiz->esq, primeiro);
+        print_pre_ordenado(Raiz->dir, primeiro);
     }
 }
 
-void print_pos_ordenado(No *Raiz) {
+void print_pos_ordenado(No *Raiz, int *primeiro) {
     if (Raiz != NULL) {
-        print_pos_ordenado(Raiz->esq);
-        print_pos_ordenado(Raiz->dir);
-        printf("%c ", Raiz->info);
+        print_pos_ordenado(Raiz->esq, primeiro);
+        print_pos_ordenado(Raiz->dir, primeiro);
+        if (*primeiro) {
+            *primeiro = 0;
+        } else {
+            printf(" ");
+        }
+        printf("%c", Raiz->info);
     }
 }
 
