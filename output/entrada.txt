@@ -1,11 +1,12 @@
-I c
-I f
-I a
-I h
+I 5
+I 2
+I 4
+I 1
 INFIXA
 PREFIXA
 POSFIXA
-P z
-P h
-I g
+P 3
+P 1
+INFIXA
+R 1
 INFIXA
