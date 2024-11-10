@@ -99,4 +99,3 @@ void percurso_nivel(No *Raiz) {
     }
     
 }
-
