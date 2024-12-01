@@ -23,7 +23,7 @@ int main()
             for(int l = 0; S[l] != '\0' && R[achei] != '\0'; l++)
             {
                 if (S[l]== R[achei])             //testa se as posicoes sao iguais
-                {                                //se for igual vai incrementado o vetor R e testa a proxima posicao
+                {                                //se for igual vai incrementado o vetor R, e testa a proxima posicao
                     achei ++;
                 }    
             }
