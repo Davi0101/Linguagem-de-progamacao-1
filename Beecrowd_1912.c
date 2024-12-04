@@ -1,53 +1,50 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-int main()
-{
-    int n, q, cont1, cont2, achei  = 0;
-   
 
-    char S[100001];
-    char R[101];
+int main(void) {
+    int n, alvo;
 
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++)
-    {
-        scanf(" %[^\n]", S);
+    while (scanf("%d %d", &n, &alvo) && n != 0 && alvo != 0) {
+        int h[n];
+        double soma = 0;
 
-        cont1 = strlen(S);       //tamanho da string s
-        scanf("%d",&q);
-        for (int j = 0; j < q; j++)
-        {
-            scanf(" %[^\n]",R);
-
-            cont2 = strlen(R);                   //tamanho da string r
-            achei  = 0;
-            for(int l = 0; S[l] != '\0' && R[achei] != '\0'; l++)
-            {
-                
-                if (S[l]== R[achei])
-                {
-                    achei ++;
-                }    
-            }
-            if (R[achei] == '\0')
-                {
-                    printf("Yes\n");
-                }
-                
-                else
-                {
-                    printf("No\n");
-                }
-            
-
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &h[i]);
+            soma += h[i];
         }
-        
-    }
-    
-    
 
+        if (alvo > soma) {
+            printf("-.-\n");
+            continue;
+        }
+
+        if (alvo == soma) {
+            printf(":D\n");
+            continue;
+        }
+
+        double corte = h[0];
+        double esq = 0, dir = 10000;
+
+        while (dir - esq > 1e-9) {
+            corte = (esq + dir) / 2.0;
+            soma = 0;
+
+            for (int i = 0; i < n; i++) {
+                if (h[i] > corte) {
+                    soma += h[i] - corte;
+                }
+            }
+
+            if (soma >= alvo) {
+                esq = corte;
+            } else {
+                dir = corte;
+            }
+        }
+
+        printf("%.4lf\n", corte);
+    }
 
     return 0;
 }
